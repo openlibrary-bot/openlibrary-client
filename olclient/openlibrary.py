@@ -5,11 +5,11 @@ import json
 from typing import List, Dict, Optional, Any
 
 import jsonschema
+import pathlib
 import logging
 import os
 import re
 from urllib.parse import urlencode
-from urllib.request import pathname2url
 
 from referencing import Registry, Resource
 
@@ -28,7 +28,7 @@ logger = logging.getLogger('openlibrary')
 
 def _schema_uri(path: str) -> str:
     """Return a canonical file:// URI for an absolute schema path."""
-    return 'file:' + pathname2url(os.path.realpath(path))
+    return pathlib.Path(os.path.realpath(path)).as_uri()
 
 
 def _build_schema_registry(schemata_dir: str) -> Registry:

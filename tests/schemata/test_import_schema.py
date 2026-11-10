@@ -1,16 +1,16 @@
 import json
 import jsonschema
+import pathlib
 import os
 import pytest
 from referencing import Registry, Resource
-from urllib.request import pathname2url
 
 SCHEMATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'olclient', 'schemata')
 IMPORT_SCHEMA = os.path.join(SCHEMATA_DIR, 'import.schema.json')
 
 
 def _schema_uri(path):
-    return 'file:' + pathname2url(os.path.realpath(path))
+    return pathlib.Path(os.path.realpath(path)).as_uri()
 
 
 def _build_schema_registry(schemata_dir):
